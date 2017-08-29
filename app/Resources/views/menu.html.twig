@@ -1,0 +1,18 @@
+{% extends 'DarvinMenuBundle::menu.html.twig' %}
+
+{% block listBody %}
+{% import 'knp_menu.html.twig' as knp_menu %}
+    {% if item.level > 0 %}
+        <div class="dropdown_block menu_level_{{ item.level }}">
+            <ul class="cf">
+            {{ block('children') }}
+            </ul>
+        </div>
+    {% else %}
+        <ul class="cf">
+        {{ block('children') }}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block images %}{% endblock %}

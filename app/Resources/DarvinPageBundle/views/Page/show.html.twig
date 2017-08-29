@@ -1,0 +1,52 @@
+{% extends '::layout.html.twig' %}
+
+{% if page.text is not empty %}
+    {% set pageIsEmpty = false %}
+    {% set page_text = page.text|content_embed_widgets %}
+{% else %}
+    {% set pageIsEmpty = true %}
+    {% set page_text = '' %}
+{% endif %}
+
+{% import 'DarvinContentBundle::macros.html.twig' as darvin_content %}
+
+{% block meta %}{{ darvin_content.meta_tags(page.metaDescription, page.metaKeywords) }}{% endblock %}
+
+{% block title %}{{ darvin_content.meta_title(page.metaTitle) }}{% endblock %}
+
+{% block heading %}{{ darvin_content.heading(page.heading) }}{% endblock %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = darvin_menu_slug_breadcrumbs() %}
+    {{ parent() }}
+    {{ breadcrumbs|raw }}
+    {% if not breadcrumbs|trim %}
+        <span>{{ page.title }}</span>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if children is not empty %}
+        {% if page.label=="catalog" %}
+            {% for child in children %}
+                <a class="sub_category_header" href="{{ path('darvin_content_content_show', {'slug': child.slug}) }}">
+                    {{ child.title }}
+                </a>
+                {{ child.annotation|raw }}
+            {% endfor %}
+        {% else %}
+            <div class="subcategory">
+                {% for child in children %}
+                    <div class="item">
+                        <div class="text"><a href="{{ path('darvin_content_content_show', {'slug': child.slug}) }}">{{ child.title }}</a></div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endif %}
+    {{ page_text|raw }}
+
+    {% if pageIsEmpty == true %}
+        <p>Страница в процессе наполнения, приносим свои извинения.</p>
+    {% endif %}
+{% endblock %}

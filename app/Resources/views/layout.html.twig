@@ -1,0 +1,143 @@
+{% extends app.debug ? '::base.html.twig' : '::base_compressed.html.twig' %}
+
+{% set flashes = app.session.flashBag.all %}
+
+{% set is_home_page = ('darvin_page_homepage') %}
+
+{% set is_inner_page = ('darvin_page_homepage' == app.request.get('_route')) %}
+
+{% set darvin_menu_main_html =  knp_menu_render('darvin_menu_main', {'template': '::menu.html.twig', 'branch_class': 'with_dropdown', 'currentClass': 'current', 'ancestorClass': 'current', 'depth': '2' }) %}
+
+
+{% block title %}{{ block('heading') }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&amp;subset=cyrillic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i">
+    {% stylesheets
+        'assets/styles/main.css'
+        filter='?cssembed'
+        filter='cssrewrite'
+        filter='?yui_css'
+        output='assets/compiled/main.css'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" media="screen">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <header >
+        <div class="wrapper">
+            <nav>
+                {{ darvin_menu_main_html|raw }}
+            </nav>
+            <div class="info">
+                <div class="cf">
+                    <div class="left_item">
+                        <div class="schedule">
+                            <div class="day">Пн &mdash; Пт:</div>
+                            <div class="time">с 7<sup>00</sup>&nbsp;до 21<sup>30</sup>,</div>
+                            <div class="day">Сб &mdash; Вс:</div>
+                            <div class="time">с 9<sup>00</sup>&nbsp;до 17<sup>30</sup></div>
+                        </div>
+                        <div class="text">
+                            В остальное время<br/>Вы можете оформить интернет-заказ
+                        </div>
+                    </div>
+                    <div class="middle_item">
+                        <div class="logo">
+                            <a href="{{ path('darvin_page_homepage') }}"><img src="{{ asset('assets/images/logo.png') }}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="right_item">
+                        <div class="contacts">
+                            <a href="tel:+74959214459"><div class="code">+7&nbsp;(495)&nbsp;</div>921-44-59</a>,
+                            <a href="tel:+74952238693"><div class="code">+7&nbsp;(495)&nbsp;</div>223-86-93</a>
+                        </div>
+                        <div class="order">
+                            <a href="" class="button">Оформить заказ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if is_home_page %}
+            <div class="slider">
+                <div class="slide">
+                    <img src="{{ asset('assets/images/slide.jpg') }}" alt="">
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+    <main>
+
+                <div class="wrapper">
+                    {% block block_for_home_page %}{% endblock %}
+                    {% block block_for_inner_page %}
+                    <div class="breadcrumbs">
+                        {% block breadcrumbs %}
+                            <a href="{{ path('darvin_page_homepage') }}">Главная</a>
+                        {% endblock %}
+                    </div>
+                    <h1>{% block heading %}{% endblock %}</h1>
+                    {% block content %}{% endblock %}
+                    {% endblock %}
+                </div>
+
+    </main>
+
+    <footer>
+        <div class="wrapper">
+            <div class="footer_container container">
+                <div class="footer cf">
+                    <div class="logo">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="">
+                    </div>
+                    <div class="info">
+                        <div class="item">
+                            <div class="contacts">
+                                <a href="tel:+74959214459">+7&nbsp;(495)&nbsp;921-44-59</a>,
+                                <a href="tel:+74952238693">+7&nbsp;(495)&nbsp;223-86-93</a>
+                            </div>
+                            <div class="address">
+                                <div class="item">г. Москва, Нагорный проезд, дом 10а</div>
+                                <div class="item">min.voda7@gmail.com</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="schedule">
+                                <div class="item">Пн &mdash; Пт:&nbsp;с 7<sup>00</sup>&nbsp;до 21<sup>30</sup></div>
+                                <div class="item">Сб &mdash; Вс:&nbsp;с 9<sup>00</sup>&nbsp;до 17<sup>30</sup></div>
+                            </div>
+                            <div class="link"><a href="">Карта проезда</a></div>
+                        </div>
+                        <div class="item">
+                            <div class="darvin">
+                                <div class="logo"><img src="{{ asset('assets/images/logo_darvin.png') }}" alt=""></div>
+                                <div class="text">Cоздание сайта доставки воды <a href="">Darvin Studio</a></div>
+                            </div>
+                            <div class="copywrite">&copy; 2017. Все права защищены</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+
+
+{% block javascripts %}
+    <a href="javascript:;" id="scrollTop"><img src="i{{ asset('assets/images/scroll_arrow.png') }}scroll_arrow.png" alt="">Top</a>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/init.js') }}"></script>
+    {% javascripts
+        'assets/scripts/init.js'
+        filter='?closure'
+        output='assets/compiled/init.js'
+    %}
+
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}

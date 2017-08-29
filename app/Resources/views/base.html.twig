@@ -1,0 +1,21 @@
+{% block html %}
+    <!DOCTYPE html>
+    <html lang="{{ app.request.locale|default }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="format-detection" content="telephone=no">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block meta %}{% endblock %}
+        {{ content_canonical_url() }}
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" sizes="16x16 32x32 48x48 64x64" href="{{ asset('assets/images/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+    </head>
+    <body class="{% block body_class %}inner_page{% endblock %}">
+    {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+    </body>
+    </html>
+{% endblock %}

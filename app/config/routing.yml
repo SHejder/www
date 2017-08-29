@@ -1,0 +1,44 @@
+ #Third party bundles
+bazinga_js_translation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
+
+liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+oneup_uploader:
+    resource: .
+    type:     uploader
+
+# App bundle
+#app:
+#    resource: "@AppBundle/Controller/"
+#    type:     annotation
+
+ #Darvin bundles
+darvin_admin:
+    resource:     "@DarvinAdminBundle/Resources/config/routing.yml"
+    prefix:       /admin
+
+# Darvin ecommerce
+darvin_ecommerce_cart:
+    resource: "@DarvinECommerceBundle/Resources/config/routing/cart.yml"
+    prefix:   /cart
+
+darvin_ecommerce_order:
+    resource: "@DarvinECommerceBundle/Resources/config/routing/order/order.yml"
+    prefix:   /my/order
+
+# Darvin page
+darvin_page:
+    resource:     "@DarvinPageBundle/Resources/config/routing.yml"
+
+# Darvin content
+darvin_content:
+    resource:     "@DarvinContentBundle/Resources/config/routing.yml"
+
+darvin_order:
+    resource: "@DarvinOrderBundle/Resources/config/routing.yml"
+
+
+
+
