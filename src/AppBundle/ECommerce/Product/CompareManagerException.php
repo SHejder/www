@@ -1,6 +1,6 @@
 <?php
 /**
- * @author    Alexander Volodin <mr-stanlik@yandex.ru>
+ * @author    Igor Nikolaev <igor.sv.n@gmail.com>
  * @copyright Copyright (c) 2017, Darvin Studio
  * @link      https://www.darvin-studio.ru
  *
@@ -8,14 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace AppBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+namespace AppBundle\ECommerce\Product;
 
 /**
- * Class AppBundle
+ * E-commerce product compare manager exception
  */
-class AppBundle extends Bundle
+class CompareManagerException extends \Exception
 {
 
 }
