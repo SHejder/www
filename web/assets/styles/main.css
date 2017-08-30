@@ -1563,3 +1563,6 @@ footer .info > .item .copywrite{
 #scrollTop img{
 	position: relative;
 }
+#app_call_order_title {
+	display: none;
+}

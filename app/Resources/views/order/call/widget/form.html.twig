@@ -7,16 +7,19 @@
                         <span>Если Вам неудобно звонить нам, оставьте заявку, и мы сами Вам перезвоним для консультации. Мы ответим на все интересующие Вас вопросы о нашей продукции. Услуга бесплатна.</span>
                     </div>
                     <div class="form_item">
-                        <input name="q" type="text" placeholder="Ваше имя">
+                        {{ form_widget(form.name) }}
                         <div class="error">
                             <ul>
-                                <li>ошибка</li>
+                                <li>{{ form_errors(form.name) }}</li>
                             </ul>
                         </div>
                     </div>
                     <div class="form_item">
-                        <input name="q" type="text" placeholder="Контактный телефон">
+                        {{ form_widget(form.phone) }}
                         <div class="error">
+                            <ul>
+                                <li>{{ form_errors(form.phone) }}</li>
+                            </ul>
                         </div>
                     </div>
                     <div class="form_item block_item">
