@@ -55,7 +55,7 @@
                             <a href="tel:+74952238693"><div class="code">+7&nbsp;(495)&nbsp;</div>223-86-93</a>
                         </div>
                         <div class="order">
-                            <a href="{{ path('darvin_order_order_form', {'type': 'call'}) }}" class="button">Оформить заказ</a>
+                            <a href="{{ path('darvin_order_order_form', {'type': 'call'}) }}" class="button ajax">Оформить заказ</a>
                         </div>
                     </div>
                 </div>
@@ -131,10 +131,14 @@
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="{{ asset('assets/scripts/init.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/ajax-form.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/scripts/ajax-link.js') }}"></script>
     {% javascripts
         'assets/scripts/init.js'
+        'assets/scripts/ajax-form.js'
+        'assets/scripts/ajax-link.js'
         filter='?closure'
-        output='assets/compiled/init.js'
+        output='assets/compiled/app.js'
     %}
 
         <script src="{{ asset_url }}"></script>
