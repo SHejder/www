@@ -9,7 +9,6 @@
 
 namespace AppBundle\Form\Type\Order;
 
-use AppBundle\Form\Type\PrivacyPolicyConfirmCheckboxType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,8 +34,7 @@ class CallType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Номер телефона',
                 ),
-            ))
-            ->add('policy', PrivacyPolicyConfirmCheckboxType::class);
+            ));
     }
 
     /**
