@@ -1,9 +1,7 @@
-<div class="window">
-    <div class="container">
-        <div class="message_form overlay_call">
-            <a href="" class="wind_close"><img src="{{ asset('assets/images/wind_close.png') }}" alt="" title=""/></a>
-            {{ form_start(form, {'attr': {'class': 'ajax'}}) }}
-                <div class="form_content">
+
+<div class="message_form overlay_call">
+    {{ form_start(form, {'attr': {'class': 'ajax'}}) }}
+        <div class="form_content">
                     <p class="p_title">Закажите звонок бесплатно</p>
                     <div class="form_item block_item">
                         <span>Если Вам неудобно звонить нам, оставьте заявку, и мы сами Вам перезвоним для консультации. Мы ответим на все интересующие Вас вопросы о нашей продукции. Услуга бесплатна.</span>
@@ -27,8 +25,9 @@
                     <div class="form_item block_item">
                         <input type="submit" value="Отправить" class="button dark_button">
                     </div>
-                </div>
-            {{ form_end(form) }}
         </div>
-    </div>
+    {{ form_end(form) }}
 </div>
+
+
+
