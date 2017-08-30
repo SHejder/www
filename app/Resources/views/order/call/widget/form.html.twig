@@ -2,7 +2,7 @@
     <div class="container">
         <div class="message_form overlay_call">
             <a href="" class="wind_close"><img src="{{ asset('assets/images/wind_close.png') }}" alt="" title=""/></a>
-            <form>
+            {{ form_start(form, {'attr': {'class': 'ajax'}}) }}
                 <div class="form_content">
                     <p class="p_title">Закажите звонок бесплатно</p>
                     <div class="form_item block_item">
@@ -28,7 +28,7 @@
                         <input type="submit" value="Отправить" class="button dark_button">
                     </div>
                 </div>
-            </form>
+            {{ form_end(form) }}
         </div>
     </div>
 </div>
