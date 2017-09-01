@@ -1,0 +1,43 @@
+{% if publication is not empty %}
+    {% set publicationsTypeLabel = '' %}
+    {% set count = 0 %}
+    {% for publication in publications if count < 1 %}
+        {% set publicationsTypeLabel = publication.type.label %}
+        {% set count = 1 %}
+    {% endfor %}
+
+    {% if publicationsTypeLabel == 'news' %}
+        {% for publication in publications %}
+            <div class="publication">
+                <div class="news">
+                    <div class="item">
+                        <div class="image">
+                            {% if image_exists(publication.image) %}
+                                <img src="{{ publication.image|image_crop('publication_list') }}"
+                                     alt="{{ publication.title }}" title="{{ publication.title }}">
+                            {% else %}
+                                <img src="{{ asset('assets/images/new_4.jpg') }}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="content">
+                            <div class="header">
+                                <div class="date">{{ publication.publishedAt|date('d.m.Y') }}</div>
+                                <a href="{{ path('darvin_content_content_show', {'slug': publication.slug}) }}" > {{ publication.title }} </a>
+                            </div>
+                            <div class="annotation">
+                                {% if publication.annotation %}{{ publication.annotation|raw }}{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <!--for articles--!>
+    {% elseif publicationsTypeLabel == 'stati' %}
+
+    {% endif %}
+
+    {% if pagination %}
+        {{ knp_pagination_render(pagination) }}
+    {% endif %}
+{% endif %}

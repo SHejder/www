@@ -1,0 +1,22 @@
+{% extends '::layout.html.twig' %}
+
+{% import 'DarvinContentBundle::macros.html.twig' as darvin_content %}
+
+{% block meta %}{{ darvin_content.meta_tags(publication.metaDescription, publication.metaKeywords) }}{% endblock %}
+
+{% block title %}{{ darvin_content.meta_title(publication.metaTitle) }}{% endblock %}
+
+{% block heading %}{{ darvin_content.heading(publication.heading) }}{% endblock %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = darvin_menu_breadcrumbs() %}
+    {{ parent() }}
+    {{ breadcrumbs|raw }}
+    {% if not breadcrumbs|trim %}
+        {{ publication.title }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {{ publication.text|content_embed_widgets }}
+{% endblock %}
