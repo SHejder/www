@@ -4,14 +4,14 @@
 
 {% block list %}
     {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
-        {{ block('children') }}
+       {{ block('children') }}
     {% endif %}
 {% endblock %}
 
 {% block item %}
     {% if item.displayed and matcher.isAncestor(item) or matcher.isCurrent(item) %}
         {% if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
-            {{ block('linkElement') }}
+            <span class="path-item">{{ block('linkElement') }}</span>
         {% else %}
             {{ block('spanElement') }}
         {% endif %}
