@@ -1,4 +1,4 @@
-{% if publication is not empty %}
+{% if publications is not empty %}
     {% set publicationsTypeLabel = '' %}
     {% set count = 0 %}
     {% for publication in publications if count < 1 %}
@@ -32,9 +32,23 @@
                 </div>
             </div>
         {% endfor %}
-        <!--for articles--!>
-    {% elseif publicationsTypeLabel == 'stati' %}
 
+    {% elseif publicationsTypeLabel == 'stati' %}
+        {% for publication in publications %}
+            <div class="publication">
+                <div class="articles">
+                    <div class="item">
+                        <div class="content">
+                            <div class="header">
+                                <a href="{{ path('darvin_content_content_show', {'slug': publication.slug}) }}" > {{ publication.title }} </a>
+                            </div>
+                                <div class="annotation">
+                                    {% if publication.annotation %}{{ publication.annotation|raw }}{% endif %}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
     {% endif %}
 
     {% if pagination %}
