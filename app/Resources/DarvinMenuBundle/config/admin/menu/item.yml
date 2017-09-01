@@ -1,0 +1,7 @@
+extends: "@DarvinMenuBundle/Resources/config/admin/menu/item.yml"
+
+form:
+    edit:
+        fields:
+            remove~image: ~
+            remove~hoverImage: ~
