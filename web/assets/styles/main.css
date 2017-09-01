@@ -768,6 +768,7 @@ main .h2  p.image{
 .path .path-item{
 	position: relative;
     padding: 0 10px;
+	margin-right: 12px;
 }
 
 .path a{
@@ -1392,6 +1393,7 @@ footer .info > .item .copywrite{
 
 .message_form .error ul{
 	margin: 8px 0;
+	padding: inherit;
 }
 
 .message_form .error ul li{
