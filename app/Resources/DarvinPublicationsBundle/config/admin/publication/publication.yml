@@ -1,0 +1,38 @@
+extends: "@DarvinPublicationsBundle/Resources/config/admin/publication/publication.yml"
+
+#sortable_fields:
+#    inHome: ~
+#
+#view:
+#    index:
+#        fields:
+#            after~hidden~inHome:        ~
+#            after~publishedAt~lifeTime: ~
+#    show:
+#        fields:
+#            after~hidden~inHome:        ~
+#            after~publishedAt~lifeTime: ~
+#form:
+#    filter:
+#        fields:
+#            publishedAtFrom: ~
+#            publishedAtTo:   ~
+#    index:
+#        fields:
+#            publishedAt:
+#                options:
+#                    widget: single_text
+#                    format: dd.MM.yyyy HH:mm
+#            inHome:
+#                options:
+#                    attr:
+#                        required:  false
+#    edit:
+#        fields:
+#            translations:
+#                options:
+#                    fields:
+#                        after~title~lifeTime: ~
+#            after~slugSuffix~inHome:
+#                options:
+#                    required:  false

@@ -1,0 +1,4 @@
+extends: "@DarvinPublicationsBundle/Resources/config/admin/tag.yml"
+
+menu:
+    skip: true
