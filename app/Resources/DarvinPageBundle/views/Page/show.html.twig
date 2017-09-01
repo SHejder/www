@@ -17,7 +17,7 @@
 {% block heading %}{{ darvin_content.heading(page.heading) }}{% endblock %}
 
 {% block breadcrumbs %}
-    {% set breadcrumbs = darvin_menu_slug_breadcrumbs() %}
+    {% set breadcrumbs|raw = darvin_menu_slug_breadcrumbs() %}
     {{ parent() }}
     {{ breadcrumbs|raw }}
     {% if not breadcrumbs|trim %}
@@ -26,8 +26,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="inner_container container">
-    <div class="inner cf">
         {% if children is not empty %}
         {% if page.label=="catalog" %}
             {% for child in children %}
@@ -51,6 +49,4 @@
     {% if pageIsEmpty == true %}
         <p>Страница в процессе наполнения, приносим свои извинения.</p>
     {% endif %}
-    </div>
-</div>
 {% endblock %}
