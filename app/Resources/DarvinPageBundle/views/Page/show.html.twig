@@ -17,7 +17,7 @@
 {% block heading %}{{ darvin_content.heading(page.heading) }}{% endblock %}
 
 {% block breadcrumbs %}
-    {% set breadcrumbs|raw = darvin_menu_slug_breadcrumbs() %}
+    {% set breadcrumbs = darvin_menu_slug_breadcrumbs() %}
     {{ parent() }}
     {{ breadcrumbs|raw }}
     {% if not breadcrumbs|trim %}
