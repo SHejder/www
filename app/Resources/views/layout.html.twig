@@ -70,20 +70,26 @@
         </div>
     </header>
     <main>
-
-                <div class="wrapper">
-                    {% block block_for_home_page %}{% endblock %}
-                    {% block block_for_inner_page %}
-                    <div class="breadcrumbs">
+        <div class="wrapper">
+            {% block block_for_home_page %}{% endblock %}
+            {% block block_for_inner_page %}
+                <div class="path_container container">
+                    <div class="path cf">
                         {% block breadcrumbs %}
-                            <a href="{{ path('darvin_page_homepage') }}">Главная</a>
+                        <span class="path-item"><a href="{{ path('darvin_page_homepage') }}">Главная</a></span>
                         {% endblock %}
                     </div>
-                    <h1>{% block heading %}{% endblock %}</h1>
-                    {% block content %}{% endblock %}
-                    {% endblock %}
                 </div>
-
+            <div class="inner_container container">
+                <div class="inner cf">
+            <h1>{% block heading %}{% endblock %}</h1>
+                    <div class="content">
+            {% block content %}{% endblock %}
+                    </div>
+            {% endblock %}
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
