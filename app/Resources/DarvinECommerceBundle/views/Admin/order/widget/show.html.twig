@@ -1,0 +1,49 @@
+{% extends 'DarvinAdminBundle:Crud/widget:show.html.twig' %}
+
+{% trans_default_domain 'admin' %}
+
+{% block widget_content %}
+    {{ parent() }}
+    <br>
+    <br>
+    <p>{% trans %}ecommerce_order.action.show.items{% endtrans %}</p>
+    <div class="overlay_order_table">
+        <table>
+            <thead>
+                <tr>
+                    <th>{% trans %}ecommerce_order_item.entity.product_title{% endtrans %}</th>
+                    {#<th>{% trans %}ecommerce_order_item.entity.product_price{% endtrans %}</th>#}
+                    <th>Параметры</th>
+                    <th>{% trans %}ecommerce_order_item.entity.product_count{% endtrans %}</th>
+                    <th>{% trans %}ecommerce_order_item.entity.sum_price{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in entity.items %}
+                    <tr>
+                        <td>
+                            {% if item.product %}
+                                {{ admin_widget_show_link(item.product, {'text_link': true}) }}
+                            {% else %}
+                                {{ item.productTitle }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ item.parameters|raw }}
+                        </td>
+                        {#<td>{% trans with {'%price%': item.productPrice} %}common.price{% endtrans %}</td>#}
+                        <td>{{ item.productCount }}</td>
+                        <td>{% trans with {'%price%': item.sumPrice} %}common.price{% endtrans %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"></td>
+                    <td>{{ entity.totalProductCount }}</td>
+                    <td>{% trans with {'%price%': entity.totalPrice} %}common.price{% endtrans %}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends ':email:service_layout.html.twig' %}
+
+{% block content %}
+    <h3>{% trans %}cart.email.checkout.order_items{% endtrans %}</h3>
+
+    {% include 'DarvinECommerceBundle:Order/order/widget:show.html.twig' %}
+
+    {% if order.user %}
+        <a href="{{ url('darvin_ecommerce_order_show', {'id': order.id}) }}">
+            {% trans %}ecommerce_order.action.show.link{% endtrans %}
+        </a>
+    {% endif %}
+{% endblock %}

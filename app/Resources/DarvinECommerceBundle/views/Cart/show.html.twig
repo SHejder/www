@@ -1,0 +1,17 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}{% trans %}cart.action.show.title{% endtrans %}{% endblock %}
+
+{% block heading %}Предварительный заказ{% endblock %}
+
+{% block breadcrumbs %}
+    {{ parent() }}
+    <span>Корзина</span>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'DarvinECommerceBundle:Cart/widget:show.html.twig' %}
+
+    {{ content_widget_render('featured_products') }}
+{% endblock %}

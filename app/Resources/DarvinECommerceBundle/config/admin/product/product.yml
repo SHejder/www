@@ -1,0 +1,127 @@
+extends: "@DarvinECommerceBundle/Resources/config/admin/product/product.yml"
+
+sortable_fields:
+    new: ~
+    bestseller: ~
+    offer: ~
+    showOnHomePage: ~
+
+children:
+    - AppBundle\Entity\ECommerce\Product\Variant
+view:
+    show:
+        fields:
+            remove~annotation: ~
+    index:
+        fields:
+            after~hidden~new:           ~
+            after~new~bestseller:       ~
+            after~bestseller~offer:     ~
+            after~offer~showOnHomePage: ~
+            after~title~variants:
+                widget:
+                    alias: child_links
+                    options:
+                        child_entity: AppBundle\Entity\ECommerce\Product\Variant
+form:
+    filter:
+        fields:
+            new:            ~
+            bestseller:     ~
+            offer:          ~
+            showOnHomePage: ~
+    index:
+        fields:
+            after~hidden~new:           ~
+            after~new~bestseller:       ~
+            after~bestseller~offer:     ~
+            after~offer~showOnHomePage: ~
+    edit:
+        fields:
+            new:
+                options:
+                    required: false
+            bestseller:
+                options:
+                    required: false
+            offer:
+                options:
+                    required: false
+            showOnHomePage:
+                options:
+                    required: false
+            childrenProducts:
+                type: AppBundle\Form\Type\Admin\ECommerce\Product\ChildrenProductsType
+                options:
+                    multiple: true
+                    required: false
+            childrenFurnitureProducts:
+                type: AppBundle\Form\Type\Admin\ECommerce\Product\ChildrenFurnitureProductsType
+                options:
+                    multiple: true
+                    required: false
+            video:
+                options:
+                    required: false
+            translations:
+                options:
+                    fields:
+                        remove~annotation: ~
+                        remove~discount:   ~
+                    exclude_fields:
+                        - annotation
+                        - discount
+                        - discountValue
+                        - discountRelative
+            before~images~brand:
+                type: AppBundle\Form\Type\Admin\ECommerce\Product\BrandType
+                options:
+                    multiple: false
+                    required: false
+            propertyValues:
+                type: AppBundle\Form\Type\Admin\ECommerce\Product\AppPropertyValuesType
+            propertyValuePrices:
+                type: AppBundle\Form\Type\Admin\ECommerce\Product\AppPropertyValuePricesType
+
+    new:
+        fields:
+            new:
+                options:
+                    required: false
+            bestseller:
+                options:
+                    required: false
+            offer:
+                options:
+                    required: false
+            showOnHomePage:
+                options:
+                    required: false
+            childrenProducts:
+                type: AppBundle\Form\Type\Admin\ECommerce\Product\ChildrenProductsType
+                options:
+                    multiple: true
+                    required: false
+            childrenFurnitureProducts:
+                type: AppBundle\Form\Type\Admin\ECommerce\Product\ChildrenFurnitureProductsType
+                options:
+                    multiple: true
+                    required: false
+            video:
+                options:
+                    required: false
+            translations:
+                options:
+                    fields:
+                        remove~annotation: ~
+                        remove~discount:   ~
+                    exclude_fields:
+                        - annotation
+                        - discount
+                        - discountValue
+                        - discountRelative
+            before~images~brand:
+                type: AppBundle\Form\Type\Admin\ECommerce\Product\BrandType
+                options:
+                    multiple: false
+                    required: false

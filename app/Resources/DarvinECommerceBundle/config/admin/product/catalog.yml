@@ -1,0 +1,37 @@
+extends: "@DarvinECommerceBundle/Resources/config/admin/product/catalog.yml"
+
+view:
+    index:
+        fields:
+            showOnHomePage: ~
+            furniture: ~
+    show:
+        fields:
+            showOnHomePage: ~
+            furniture: ~
+
+form:
+    index:
+        fields:
+            showOnHomePage: ~
+            furniture: ~
+    filter:
+        fields:
+            showOnHomePage: ~
+            furniture: ~
+    edit:
+        fields:
+            showOnHomePage:
+                options:
+                    required: false
+            furniture:
+                options:
+                    required: false
+    new:
+        fields:
+            showOnHomePage:
+                options:
+                    required: false
+            furniture:
+                options:
+                    required: false

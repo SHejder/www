@@ -1,0 +1,56 @@
+<div class="cart_container">
+    {% if items is empty %}
+        <h2>Вы еще ничего не добавили в Вашу корзину</h2>
+    {% else %}
+
+        {% if has_items_without_product %}
+            <div><b>{% trans %}cart.action.show.has_items_without_product{% endtrans %}</b></div>
+        {% endif %}
+
+        <div class="cart">
+            <div class="table_container">
+                <table class="nice_table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Наименование</th>
+                        <th>Характеристики</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Цена за комплект</th>
+                        <th>Удалить</th>
+                    </tr>
+                    </thead>
+                    <tbody id="main_cart_container">
+                    {% for item in items %}
+                        {% set key = item.hashSource is not empty ? item.id : item.productId %}
+                        <tr class="item_cart_container">
+                            {% include 'DarvinECommerceBundle:Cart/widget:item.html.twig' with {
+                            'count_change_form': count_change_forms[key],
+                            'remove_form':       remove_forms[key],
+                            } %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="add_goods">
+                <a href="{{ product_catalog_url_by_label('catalog') }}">Добавить еще товары</a>
+            </div>
+            <div class="result">
+                <div class="sum" id="cart_totals">
+                {{ totals|raw }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="wide_form" id="checkout_form">
+            {% include 'DarvinECommerceBundle:Cart/widget/form:checkout.html.twig' with {
+            'form': checkout_form,
+            } %}
+        </div>
+
+    {% endif %}
+</div>

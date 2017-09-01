@@ -1,0 +1,204 @@
+{% extends '::layout.html.twig' %}
+
+{% set content_text = '' %}
+{% if product.text %}
+    {% set content_text = product.text|content_embed_widgets %}
+{% endif %}
+
+{% set product_in_cart = false %}
+{% if cart_add_form == null %}
+    {% set cart_add_form = app_cart_add_form(product) %}
+    {% set product_in_cart = true %}
+{% endif %}
+
+{% set fitting_text = app_show_fitting(product) %}
+
+{% set calculator_text = app_show_calculator(product, cart_add_form) %}
+
+{% set furniture_text = furniture_list_for_product(product) %}
+
+{% set furniture_forms_text = furniture_forms_list_for_product(product) %}
+
+{% import 'DarvinContentBundle::macros.html.twig' as darvin_content %}
+
+{% block meta %}{{ darvin_content.meta_tags(product.metaDescription, product.metaKeywords) }}{% endblock %}
+
+{% block title %}{{ darvin_content.meta_title(product.metaTitle) }}{% endblock %}
+
+{% block heading %}{{ darvin_content.heading(product.heading) }}{% endblock %}
+
+{% block breadcrumbs %}
+    {% set breadcrumbs = darvin_menu_breadcrumbs() %}
+    {{ parent() }}
+    {{ breadcrumbs|raw }}
+    {% if not breadcrumbs|trim %}
+        {{ product.title }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <script>
+        var productPrice = {{ product.price }};
+        var arrayPropertyPrice = [];
+        var propertyMainPrice = 0;
+        var propertyMainCount = 0;
+        var variantPrice = 0;
+        var variants = [];
+    </script>
+    <div class="product_card_container {% if product.price == 0 %}no_price{% endif %}">
+        <div class="left">
+            {% if product.catalog.furniture %}
+                <div class="pictures">
+                    <div class="single_image">
+                        <div class="image">
+                            {#<div class="door">#}
+                            {% if product.images is not empty and image_exists(product.images.first) %}
+                                <img src="{{ product.images.first|image_resize('product_show') }}"
+                                     alt="{{ product.title }}" data-real="{{ product.images.first|image_original }}">
+                            {% else %}
+                                <img src="{{ asset('assets/images/default/default_door.png') }}"
+                                     alt="{{ product.title }}">
+                            {% endif %}
+                            {#</div>#}
+                        </div>
+                        <div class="zoom">
+                            <a href="#">Увеличить</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% else %}
+                {{ app_show_product_in_interiors(product) }}
+            {% endif %}
+        </div>
+        <div class="right">
+            {{ product_last_and_next(product) }}
+            {% include ':ecommerce/product:show_product_parameters.html.twig' with {'product': product } %}
+
+            <div class="card_form_container">
+                {{ form_start(cart_add_form, {'attr': {'class': 'ajax cart_add cart_update', 'autocomplete': 'off'}}) }}
+                    <div class="tabs_container">
+                        <div class="tabs">
+                            {% if fitting_text %}
+                            <div class="active"><div><span>Примерочная</span></div></div>
+                            {% endif %}
+                            {% if calculator_text %}
+                            <div{% if fitting_text is empty %} class="active"{% endif %}><div><span>Онлайн калькулятор</span></div></div>
+                            {% endif %}
+                            {% if furniture_text %}
+                            <div{% if fitting_text is empty and calculator_text is empty %} class="active"{% endif %}><div><span>Сопутствующая фурнитура</span></div></div>
+                            {% endif %}
+                            {% if product.video %}
+                            <div{% if fitting_text is empty and calculator_text is empty and furniture_text is empty %} class="active"{% endif %}><div><span>Видео</span></div></div>
+                            {% endif %}
+                        </div><!-- end of tabs -->
+                        {% if (fitting_text or calculator_text or furniture_text or product.video) %}
+                            <div class="contents">
+                                {% if fitting_text %}
+                                <div class="active">
+                                    {{ fitting_text|raw }}
+                                </div>
+                                {% endif %}
+                                {% if calculator_text %}
+                                <div{% if fitting_text is empty %} class="active"{% endif %}>
+                                    {{ calculator_text|raw }}
+                                </div>
+                                {% endif %}
+                                {% if furniture_text %}
+                                <div{% if fitting_text is empty and calculator_text is empty %} class="active"{% endif %}>
+                                    {{ furniture_text|raw }}
+                                </div>
+                                {% endif %}
+                                {% if product.video %}
+                                <div{% if fitting_text is empty and calculator_text is empty and furniture_text is empty %} class="active"{% endif %}>
+                                    <div class="video">
+                                        <div>
+                                            <iframe src="https://www.youtube.com/embed/{{ product.video }}" allowfullscreen=""></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div><!-- end of contents -->
+                        {% endif %}
+                    </div>
+                    <div class="prod_card_bottom">
+                        <div class="sum" >
+                            Итого:
+                            <div id="p">
+                                {% if product.price != 0 %}{{ product.price|localizednumber }} руб.{% endif %}
+                            </div>
+                        </div>
+                        <div style="display: none;">
+                        {{ form_widget(cart_add_form['variant']) }}
+                        </div>
+                        <div class="btns">
+                            <div class="cart_btn" id="add_cart_{{ product.id }}">
+                                {#{% if product_in_cart %}#}
+                                    {#<a href="{{ path('darvin_ecommerce_cart_show') }}">Tовар в корзине</a>#}
+                                {#{% else %}#}
+                                    <button type="submit">Добавить в корзину</button>
+                                {#{% endif %}#}
+                            </div>
+
+                            <div class="compare_btn">
+                                <div>
+                                    <a href="#">Добавить к сравнению</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {{ form_rest(cart_add_form) }}
+                {{ form_end(cart_add_form) }}
+                <div class="compare_btn form">
+                    {{ app_product_compare_add(product) }}
+                </div>
+            </div>
+            {{ furniture_forms_text|raw }}
+            <div class="delivery_and_pay">
+                <div><a href="#" class="delivery"><span>Доставка</span></a></div>
+                <div><a href="#" class="pay"><span>Способы оплаты</span></a></div>
+            </div>
+        </div>
+    </div>
+    {% if content_text %}
+    <div class="text card">
+        {{ content_text|raw }}
+    </div>
+    {% endif %}
+
+    {% if product.childrenProducts is not empty %}
+    <div class="similar_products">
+        <p class="caption">Похожие товары</p>
+        <div class="slider owl-carousel">
+        {% for child in product.childrenProducts %}
+            {% set url = url('darvin_content_content_show', {'slug': child.slug}) %}
+            <div class="slider_item">
+                <div class="top">
+                    <div class="img">
+                        {% set image = image_exists(child.images.first) ? child.images.first|image_resize('product_list') : asset('assets/images/default/246x246.jpg') %}
+                        <img src="{{ image }}" alt="{{ child.title }}" title="{{ child.title }}">
+                    </div>
+                    <div class="name">
+                        <div>{{ child.title }}</div>
+                    </div>
+                </div>
+                <div class="bottom">
+                    {% if child.price > 0 %}
+                    <div class="left"><span>{{ child.price|localizednumber }}&nbsp;руб.</span></div>
+                    {% endif %}
+                    <div class="right">
+                        <a  href="{{ url }}" class="btn">Подробнее</a>
+                    </div>
+                </div>
+                <div class="additional">
+                    {% if child.new %}<div><span>Новинки</span></div>{% endif %}
+                    {% if child.bestseller %}<div><span>Хит продаж</span></div>{% endif %}
+                    {% if child.offer %}<div><span>Акция</span></div>{% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

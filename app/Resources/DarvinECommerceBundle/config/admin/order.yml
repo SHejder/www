@@ -1,0 +1,7 @@
+extends: "@DarvinECommerceBundle/Resources/config/admin/order.yml"
+
+#index:
+#    fields:
+
+menu:
+    skip: true

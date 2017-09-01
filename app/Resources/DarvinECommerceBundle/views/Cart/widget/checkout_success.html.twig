@@ -1,0 +1,13 @@
+<div class="success">
+    <div>
+        <div><img src="{{ asset('assets/images/success.png')}}" alt="Успех"></div>
+        <p class="thnx">Спасибо!</p>
+        <p>Ваш заказ №{{ order.id }} успешно оформлен!</p>
+
+        {% if app.session.get("disable_adaptive")=='true' %}
+            <p><a href="{{ product_catalog_url_by_label('catalog') }}" class="btn btn-orange">Продолжить покупки</a></p>
+        {% else %}
+            <p><a href="{{ path('darvin_page_homepage') }}" class="btn btn-green_inverse">Продолжить покупки</a></p>
+        {% endif %}
+    </div>
+</div>

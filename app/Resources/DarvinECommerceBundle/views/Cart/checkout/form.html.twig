@@ -1,0 +1,7 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}{% trans %}cart.action.checkout.title{% endtrans %}{% endblock %}
+
+{% block heading %}{% trans %}cart.action.checkout.title{% endtrans %}{% endblock %}
+
+{% block content %}{% include 'DarvinECommerceBundle:Cart/widget/form:checkout.html.twig' %}{% endblock %}

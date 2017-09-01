@@ -1,0 +1,33 @@
+<table>
+    <thead>
+        <tr>
+            <th>{% trans %}ecommerce_order_item.entity.product{% endtrans %}</th>
+            <th>{% trans %}ecommerce_order_item.entity.product_price{% endtrans %}</th>
+            <th>{% trans %}ecommerce_order_item.entity.product_count{% endtrans %}</th>
+            <th>{% trans %}ecommerce_order_item.entity.sum_price{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order_item in order.items %}
+            <tr>
+                <td>
+                    {% if order_item.product %}
+                        <a href="{{ url('darvin_content_content_show', {'slug': order_item.product.slug}) }}">{{ order_item.product.title }}</a>
+                    {% else %}
+                        {{ order_item.productTitle }}
+                    {% endif %}
+                </td>
+                <td>{% trans with {'%price%': order_item.productPrice|localizednumber} %}common.price{% endtrans %}</td>
+                <td>{{ order_item.productCount }}</td>
+                <td>{% trans with {'%price%': order_item.sumPrice|localizednumber} %}common.price{% endtrans %}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">Итоговая цена</td>
+            <td>{{ order.totalProductCount }}</td>
+            <td>{% trans with {'%price%': order.totalPrice|localizednumber} %}common.price{% endtrans %}</td>
+        </tr>
+    </tfoot>
+</table>
