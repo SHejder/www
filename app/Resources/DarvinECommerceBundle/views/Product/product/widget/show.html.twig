@@ -1,46 +1,23 @@
+
+
+<div class="catalog">
 {% for product in products %}
     {% set url = url('darvin_content_content_show', {'slug': product.slug}) %}
-    <div>
-        <div class="slider_item">
-            <div class="top">
-                <div class="img">
-                    {% if product.images is not empty and image_exists(product.images.first) %}
-                        <a href="{{ url }}">
-                            <img src="{{ product.images.first|image_resize('product_list') }}" alt="{{ product.title }}" title="{{ product.title }}">
-                        </a>
-                    {% else %}
-                        <a href="{{ url }}">
-                            <img src="{{ asset('assets/images/default/246x246.jpg') }}" alt="">
-                        </a>
-                    {% endif %}
-                </div>
-                <div class="name">
-                    <div>{{ product.title }}</div>
-                </div>
+    <div class="item_wrap">
+        <div class="item">
+            <div class="image">
+                <a href="{{ url }}">
+                <img src="{{ product.images.first|image_resize('product_list') }}" alt="{{ product.title }}">
+                </a>
             </div>
-            <div class="bottom">
-                {% if product.price > 0 %}
-                <div class="left">от <span>{{ product.price|localizednumber }}&nbsp;руб.</span></div>
-                {% endif %}
-                <div class="right">
-                    <a  href="{{ url }}" class="btn">Подробнее</a>
-                </div>
-            </div>
-            <div class="additional">
-                {% if product.new %}<div><span>Новинки</span></div>{% endif %}
-                {% if product.bestseller %}<div><span>Хит продаж</span></div>{% endif %}
-                {% if product.offer %}<div><span>Акция</span></div>{% endif %}
-            </div>
-            <div class="add_to_compare">
-                <div>
-                    {{ app_product_compare_add(product) }}
-                </div>
+            <div class="info">
+                <div class="name"><a href="{{ url }}">{{ product.title }}</a></div>
+                <div class="price">{{ product.price| localizednumber}} руб.</div>
             </div>
         </div>
     </div>
 {% endfor %}
-{% if products_pagination.totalItemCount() > 1 %}
-    <div class="catalog-pager">
+</div>
+    <div class="pagination">
         {{ knp_pagination_render(products_pagination) }}
     </div>
-{% endif %}
