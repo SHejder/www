@@ -1414,7 +1414,6 @@ footer .info > .item .copywrite{
 .catalog{
 	font-size: 0;
 	line-height: 0;
-	display: table;
 	margin: 25px 0 0 -30px;
 }
 
@@ -1452,7 +1451,7 @@ footer .info > .item .copywrite{
 }
 
 .catalog .info .name{
-	
+	min-height: 40px;
 }
 
 .catalog .info .name a{
