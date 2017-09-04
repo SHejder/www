@@ -129,3 +129,7 @@ darvin_menu:
             alias:       main
             breadcrumbs: true
 
+knp_paginator:
+    template:
+        pagination: ::pagination.html.twig
+
