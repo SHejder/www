@@ -1,14 +1,6 @@
 {% extends '::layout.html.twig' %}
 
-{#{% form_theme filter_form ':form:fields_compact.html.twig' %}#}
 
-{% if catalog.text is not empty %}
-    {% set pageIsEmpty = false %}
-    {% set catalog_text = catalog.text|content_embed_widgets %}
-{% else %}
-    {% set pageIsEmpty = true %}
-    {% set catalog_text = '' %}
-{% endif %}
 
 {% import 'DarvinContentBundle::macros.html.twig' as darvin_content %}
 
@@ -28,147 +20,28 @@
 {% endblock %}
 
 {% block content %}
-
-    {% if children is not empty and catalog.label == "catalog" %}
-        {% set pageIsEmpty = false %}
-        {% include ':ecommerce:catalog_children_list.html.twig' with {'catalogs': children } %}
-    {% else %}
-
-        <div class="catalogue_two_columns{% if catalog.label == 'furniture' %} furniture_page{% endif %}">
-            <div class="left">
-                {% if catalog.furniture == true %}
-                <div class="aside_catalogue">
-                    <p class="caption">Категории</p>
-                    <div class="cat_container">
-                        {{ knp_menu_render('darvin_menu_furniture', {'template': '::menu.html.twig', 'currentClass': 'active', 'ancestorClass': 'active', 'depth': '1' }) }}
-                    </div>
-                </div>
-                {% elseif products is not empty or app.request.query.has(filter_form.vars.name) %}
-                    <div class="filter">
-                    <p class="caption">Фильтр</p>
-                    <div class="form_container">
-                        {{ form_start(filter_form, {'attr': {'id': 'filter_form', 'autocomplete': 'off'}})}}
-                        {% set properties = app_properties_list(catalog) %}
-                            <div class="goods_sections_checks labled_checkboxes">
-                                <div>
-                                    {{ form_widget(filter_form['bestseller'], {'attr': {'data-id': 'popular_models'}}) }}
-                                    {{ form_label(filter_form['bestseller']) }}
-                                </div>
-                                <div>
-                                    {{ form_widget(filter_form['new'], {'attr': {'data-id': 'new_models'}}) }}
-                                    {{ form_label(filter_form['new']) }}
-                                </div>
-                            </div>
-                            <div class="item">
-                                <p class="name">Цена</p>
-                                <div class="price_interval" >
-                                    <div class="slider-range"></div>
-                                    <div class="sums">
-                                        от
-                                        {{ form_widget(filter_form['min_price'],{'attr': {'class': 'min_price'}}) }}
-                                        до
-                                        {{ form_widget(filter_form['max_price'],{'attr': {'class': 'max_price'}}) }}
-                                        руб.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <p class="name">Производитель</p>
-                                <div class="select_box">
-                                    <div>
-                                        {{ form_widget(filter_form.children['brand']) }}
-                                    </div>
-                                </div>
-                            </div>
-                            {% for property in properties if filter_form.children[property.id] is defined %}
-
-                                {% set brand_ids = filter_form.children[property.id].vars.brandIds|default([]) %}
-
-                                {% if property.choiceMultiple and property.choiceExpanded %}
-                                    <div class="item product_property" data-brand-dependent="{{ property.brandDependent ? 1 : 0 }}">
-                                        <p class="name">{{ property.title }}</p>
-                                        <div class="labled_checkboxes">
-                                            {% for child in filter_form.children[property.id] %}
-
-                                                {% set attr = brand_ids[child.vars.value] is defined ? {'data-brands': brand_ids[child.vars.value]|json_encode} : {} %}
-
-                                                <div>
-                                                    {{ form_widget(child, {'attr': attr}) }}
-                                                    <label for="{{ child.vars.id }}">{{ child.vars.label }}</label>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                {% else %}
-                                    <div class="item product_property" data-brand-dependent="{{ property.brandDependent ? 1 : 0 }}">
-                                        <p class="name">{{ property.title }}</p>
-                                        <div class="select_box">
-                                            <div>
-                                                {{ form_widget(filter_form.children[property.id], {'placeholder': 'Выбрать из списка'}) }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                            {% if app.request.query.has(filter_form.vars.name) %}
-                                <div class="item clear_filter">
-                                    <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">Сбросить фильтр</a>
-                                </div>
+    <div class="catalog">
+         {% for child in children %}
+                <div class="item_wrap">
+                    <div class="item">
+                        <div class="image">
+                            {% if image_exists(child.image) %}
+                                <img src="{{ child.image|image_resize('catalog_image_catalog_show_children') }}"
+                                     alt="{{ child.title }}" title="{{ child.title }}">
+                            {% else %}
+                                <img src="{{ asset('assets/images/new_4.jpg') }}" alt="">
                             {% endif %}
-                            <div class="item">
-                                <div class="submit_container">
-                                    <button type="submit" class="btn">Подобрать</button>
-                                </div>
-                            </div>
-                        {{ form_end(filter_form) }}
+                        </div>
+                        <div class="info">
+                            <div class="name"><a href="{{ path('darvin_content_content_show', {'slug': child.slug}) }}">{{ child.title }}</a></div>
+                        </div>
                     </div>
                 </div>
-                {% endif %}
-            </div>
-            <div class="right">
-                {% if catalog.furniture != true and (products is not empty or app.request.query.has(filter_form.vars.name)) %}
-                <div class="goods_sections">
-                    <div>
-                        <a href="#" class="item{% if not filter_form.bestseller.vars.data and not filter_form.new.vars.data %} active{% endif %}" data-id="all_models">
-                            все модели
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#" class="item{% if filter_form.bestseller.vars.data %} active{% endif %}" data-id="popular_models">
-                            популярные модели
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#" class="item{% if filter_form.new.vars.data %} active{% endif %}" data-id="new_models">
-                            новинки
-                        </a>
-                    </div>
-                </div>
-                {% endif %}
-                {% if children is not empty %}
-                    {% set pageIsEmpty = false %}
-                    {% include ':ecommerce:children_list.html.twig' with {'catalogs': children } %}
-                {% endif %}
-                <div class="items_container" id="products_container">
-                    {% if products is not empty %}
-                        {% set pageIsEmpty = false %}
-                        {% include 'DarvinECommerceBundle:Product/product/widget:show.html.twig' %}
-                    {% elseif app.request.query.has(filter_form.vars.name) %}
-                        <p>К сожалению по Вашему запросу ничего не найдено.</p>
-                    {% endif %}
-                </div>
-                {% if catalog.furniture == true and pageIsEmpty == true and not app.request.query.has(filter_form.vars.name) %}
-                    <p>Страница в процессе наполнения, приносим свои извинения.</p>
-                {% endif %}
-            </div>
+         {% endfor %}
+    {% if products is not empty %}
+        {% include 'DarvinECommerceBundle:Product/product/widget:show.html.twig' %}
+    {% endif %}
         </div>
-    {% endif %}
-
-
-    {{ catalog_text|raw }}
-
-    {% if catalog.furniture == false and pageIsEmpty == true and not app.request.query.has(filter_form.vars.name) %}
-        <p>Страница в процессе наполнения, приносим свои извинения.</p>
-    {% endif %}
-    <div class="clear"></div>
+        {#{{ knp_pagination_render(products_pagination) }}#}
+    {{ catalog.text|raw }}
 {% endblock %}
