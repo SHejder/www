@@ -1,3 +1,7 @@
 menu:
     main: Главное
 
+ecommerce_product:
+    entity:
+        annotation: Краткое описание
+
