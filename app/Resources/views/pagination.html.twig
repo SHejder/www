@@ -1,0 +1,19 @@
+{% extends '@DarvinContent/pagination.html.twig' %}
+
+    {% block pages %}
+        {% for page in pagesInRange %}
+            {% if page != current %}
+                <span class="page"><a class="button" href="{{ path(route, query|merge({(pageParameterName): 1 != page ? page : null})) }}">{% trans with {'%page%': page} %}pagination.page{% endtrans %}</a></span>
+            {% else %}
+                <span class="page current"><a class="button" href="{{ path(route, query|merge({(pageParameterName): 1 != page ? page : null})) }}">{% trans with {'%page%': page} %}pagination.page{% endtrans %}</a></span>
+            {% endif %}
+        {% endfor %}
+    {% endblock %}
+
+    {% block all %}
+        {% if 0 != current %}
+            <span class="page"><a class="button" href="{{ path(route, query|merge({(pageParameterName): 0})) }}">{% trans %}pagination.all{% endtrans %}</a></span>
+        {% else %}
+            <span class="page current"><a class="button" href="{{ path(route, query|merge({(pageParameterName): 0})) }}">{% trans %}pagination.all{% endtrans %}</a></span>
+        {% endif %}
+    {% endblock %}
