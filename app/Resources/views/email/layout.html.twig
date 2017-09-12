@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="format-detection" content="telephone=no">
+        <title>{% block title %}{{ block('heading') }}{% endblock %}</title>
+        <!--[if (gte mso 9)|(IE)]>
+        <style type="text/css">
+            table {border-collapse: collapse;}
+        </style>
+        <![endif]-->
+    </head>
+    <body style="background: #edeef0; padding: 20px 0 20px;">
+        <table class="wrapper" align="center" style="border-collapse: collapse; border: 1px solid #c8d1e0; width: 600px; margin: 10px auto; background: #fff;">
+            <tr>
+                <td class="header-wrap" style="font-family: Arial, sans-serif; border: none; padding: 26px 38px 0;">
+                    <table class="header" style="border: none; border-collapse: collapse; width: 100%;">
+                        <tr>
+                            <td class="header__logo-wrap" style="font-family: Arial, sans-serif; border: none; padding: 0; height: 47px; text-align: left; vertical-align: middle;">
+                                <a href="{{ url('darvin_page_homepage') }}" class="header__logo" style="font-family: Arial, sans-serif; font-size: 14px; color: #333333; display: inline-block; width: 235px; height: 47px; padding: 0px 0 0;">
+                                    <img src="{{ absolute_url(asset('http://dev.darvins.ru/email-template/images/logo.png')) }}" alt="" style="border: none; display: block; width: 235px; height: 47px;">
+                                </a>
+                            </td>
+                            <td style="font-family: Arial, sans-serif; border: none; padding: 0;">
+                                <h1 style="font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; line-height: 20px; text-align: right; color: #333333; vertical-align: middle;">{% block heading %}{% endblock %}</h1>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="content-wrap" style="font-family: Arial, sans-serif; border: none; padding: 20px 38px 10px;">
+
+                    {% block content %}{% endblock %}
+
+                </td>
+            </tr>
+            <tr>
+                <td class="footer-wrap" style="font-family: Arial, sans-serif; border: none; padding: 10px 30px 10px; border-top: 1px solid #c8d1e0; border-bottom: 1px solid #c8d1e0;">
+                    <table class="footer" style="border: none; border-collapse: collapse; width: 100%;">
+                        <tr>
+                            <td class="footer__block-padding --border-bottom" style="font-family: Arial, sans-serif; border: none; padding: 12px 0;">
+                                <table class="footer__top-block" style="border: none; border-collapse: collapse; width: 100%;">
+                                    <tr>
+                                        <td class="social-link" style="font-family: Arial, sans-serif; border: none; padding: 0; text-align: right;">
+                                            <table align="center" style="border: none; border-collapse: collapse;">
+                                                <tr>
+                                                    <td class="social-link__item-wrap --centred" style="font-family: Arial, sans-serif; border: none; padding: 6px 6px 6px 6px;">
+                                                        <a class="social-link__item" href="https://plus.google.com/u/0/" target="_blank" rel="noreferrer noopener" style="font-family: Arial, sans-serif; font-size: 14px; color: #333333; display: inline-block; vertical-align: top; width: 24px; height: 24px;">
+                                                            <img src="{{ absolute_url(asset('http://dev.darvins.ru/email-template/images/gplus.png')) }}" alt="Google+" title="Google+" style="border: none; display: block; width: 24px; height: 24px;">
+                                                        </a>
+                                                    </td>
+                                                    <td class="social-link__item-wrap --centred" style="font-family: Arial, sans-serif; border: none; padding: 6px 6px 6px 6px;">
+                                                        <a class="social-link__item" href="https://www.instagram.com" target="_blank" rel="noreferrer noopener" style="font-family: Arial, sans-serif; font-size: 14px; color: #333333; display: inline-block; vertical-align: top; width: 24px; height: 24px;">
+                                                            <img src="{{ absolute_url(asset('http://dev.darvins.ru/email-template/images/inst.png')) }}" alt="Instagram" title="Instagram" style="border: none; display: block; width: 24px; height: 24px;">
+                                                        </a>
+                                                    </td>
+                                                    <td class="social-link__item-wrap --centred" style="font-family: Arial, sans-serif; border: none; padding: 6px 6px 6px 6px;">
+                                                        <a class="social-link__item" href="https://twitter.com" target="_blank" rel="noreferrer noopener" style="font-family: Arial, sans-serif; font-size: 14px; color: #333333; display: inline-block; vertical-align: top; width: 24px; height: 24px;">
+                                                            <img src="{{ absolute_url(asset('http://dev.darvins.ru/email-template/images/tw.png')) }}" alt="Twitter" title="Twitter" style="border: none; display: block; width: 24px; height: 24px;">
+                                                        </a>
+                                                    </td>
+                                                    <td class="social-link__item-wrap --centred" style="font-family: Arial, sans-serif; border: none; padding: 6px 6px 6px 6px;">
+                                                        <a class="social-link__item" href="https://www.facebook.com" target="_blank" rel="noreferrer noopener" style="font-family: Arial, sans-serif; font-size: 14px; color: #333333; display: inline-block; vertical-align: top; width: 24px; height: 24px;">
+                                                            <img src="{{ absolute_url(asset('http://dev.darvins.ru/email-template/images/fb.png')) }}" alt="Facebook" title="Facebook" style="border: none; display: block; width: 24px; height: 24px;">
+                                                        </a>
+                                                    </td>
+                                                    <td class="social-link__item-wrap --centred" style="font-family: Arial, sans-serif; border: none; padding: 6px 6px 6px 6px;">
+                                                        <a class="social-link__item" href="https://ok.ru" target="_blank" rel="noreferrer noopener" style="font-family: Arial, sans-serif; font-size: 14px; color: #333333; display: inline-block; vertical-align: top; width: 24px; height: 24px;">
+                                                            <img src="{{ absolute_url(asset('http://dev.darvins.ru/email-template/images/ok.png')) }}" alt="Odnoklassniki" title="Odnoklassniki" style="border: none; display: block; width: 24px; height: 24px;">
+                                                        </a>
+                                                    </td>
+                                                    <td class="social-link__item-wrap --centred" style="font-family: Arial, sans-serif; border: none; padding: 6px 6px 6px 6px;">
+                                                        <a class="social-link__item" href="https://vk.com" target="_blank" rel="noreferrer noopener" style="font-family: Arial, sans-serif; font-size: 14px; color: #333333; display: inline-block; vertical-align: top; width: 24px; height: 24px;">
+                                                            <img src="{{ absolute_url(asset('http://dev.darvins.ru/email-template/images/vk.png')) }}" alt="Vkontakte" title="Vkontakte" style="border: none; display: block; width: 24px; height: 24px;">
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="footer-receiving-text" style="padding: 24px; font-size: 13px; line-height: 18px; color: #424242; text-align: center; background: #edeef0; border: 1px solid #edeef0; height: 87px;">
+                <td style="font-family: Arial, sans-serif; border: none; padding: 0;">
+                    You received this e-mail because you are registered on <a href="{{ url('darvin_page_homepage') }}" style="font-family: Arial, sans-serif; font-size: 13px; color: #1f6c7d; line-height: 18px;">{{ app_project_title }}</a> with this e-mail address. <a href="#" style="font-family: Arial, sans-serif; font-size: 13px; color: #1f6c7d; line-height: 18px;">Unsubscribe</a><br>
+                    &#169; Copyright {{ 'now'|date('Y') }} Project Name. All rights reserved.
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
