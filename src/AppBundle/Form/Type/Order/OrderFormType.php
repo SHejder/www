@@ -14,8 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Darvin\ECommerceBundle\Entity\Product;
-
 
 /**
  * Class OrderFormType
@@ -56,7 +54,7 @@ class OrderFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('label_format', 'question_form_order.entity.%name%');
+        $resolver->setDefault('label_format', 'product_form_order.entity.%name%');
     }
 
     /**
@@ -64,7 +62,7 @@ class OrderFormType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_form_order';
+        return 'app_product_form_order';
     }
 }
 

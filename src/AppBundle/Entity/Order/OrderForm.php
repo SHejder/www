@@ -13,7 +13,6 @@ use Darvin\OrderBundle\Entity\AbstractOrder;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * Class Call
  *
@@ -63,9 +62,9 @@ class OrderForm extends AbstractOrder
     public function getProperties()
     {
         return [
-            'name'  => $this->name,
-            'phone' => $this->phone,
-            'email' => $this ->email,
+            'name'  => $this-> name,
+            'phone' => $this-> phone,
+            'email' => $this -> email,
             'message' => $this -> message
         ];
     }
