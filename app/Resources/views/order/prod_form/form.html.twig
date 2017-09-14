@@ -1,0 +1,20 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}{% trans %}order.action.submit.title{% endtrans %}{% endblock %}
+
+{% block heading %}{% trans %}order.action.submit.title{% endtrans %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ parent() }}
+    <span>Заказать звонок</span>
+{% endblock %}
+
+{% block content %}
+    <div class="window" id="window">
+        <div class="container" id="window-container">
+
+            {% include form_widget_template %}
+
+        </div>
+    </div>
+{% endblock %}

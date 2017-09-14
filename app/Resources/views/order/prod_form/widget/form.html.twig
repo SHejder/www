@@ -1,0 +1,48 @@
+
+<div class="message_form feedback">
+    {{ form_start(form, {'attr': {'class': 'ajax'}}) }}
+        <div class="form_content">
+            <p class="p_title">Сделать заказ</p>
+            <div class="column_item">
+                <div class="form_item block_item">
+                    {{ form_widget(form.name) }}
+                    <div class="error">
+                        <ul>
+                            <li>{{ form_errors(form.name) }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form_item block_item">
+                    {{ form_widget(form.phone) }}
+                    <div class="error">
+                        <ul>
+                            <li>{{ form_errors(form.phone) }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form_item block_item">
+                    {{ form_widget(form.email) }}
+                    <div class="error">
+                        <ul>
+                            <li>{{ form_errors(form.email) }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="column_item">
+                <div class="form_item block_item">
+                    {{ form_widget(form.message) }}
+                </div>
+            </div>
+            <div class="form_item block_item">
+                <span>Мы гарантируем конфиденциальность данных</span>
+            </div>
+            <div class="form_item block_item">
+                <button type="submit"  class="button dark_button" >Отправить</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+</div>
+
+
+
