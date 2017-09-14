@@ -1,0 +1,30 @@
+{% if types is not empty %}
+    <ul>
+        {% for type in types %}
+            <li>
+                {% if page_slugs[type.publicationListWidgetPlaceholder] is defined %}
+                    <a href="{{ path('darvin_content_content_show', {'slug': page_slugs[type.publicationListWidgetPlaceholder]}) }}">
+                        <h3>{{ type.title }}</h3>
+                    </a>
+                {% else %}
+                    <h3>{{ type.title }}</h3>
+                {% endif %}
+                {% if publications[type.id] is defined and publications[type.id] is not empty %}
+                    <ul>
+                        {% for publication in publications[type.id] %}
+                            <li>
+                                {% if image_exists(publication.image) %}
+                                    <img src="{{ publication.image|image_crop('latest_publications') }}">
+                                {% endif %}
+                                <i>{{ publication.publishedAt|date('d.m.Y') }}</i>
+                                <a href="{{ path('darvin_content_content_show', {'slug': publication.slug}) }}">
+                                    <h4>{{ publication.title }}</h4>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
