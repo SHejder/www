@@ -1569,3 +1569,9 @@ footer .info > .item .copywrite{
 #app_call_order_title {
 	display: none;
 }
+#app_product_form_order_title {
+	display: none;
+}
+.hide {
+	display: none;
+}
