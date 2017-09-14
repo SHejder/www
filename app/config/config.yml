@@ -108,13 +108,13 @@ darvin_order:
                 form: :order/call:form.html.twig
                 form_widget: :order/call/widget:form.html.twig
                 submitted: :order/call/widget:submitted.html.twig
-#        -
-#            alias:  call_wide
-#            entity: AppBundle\Entity\Order\Call
-#            form_type: AppBundle\Form\Type\Order\CallType
-#            template:
-#                form_widget: :order/call_wide/widget:form.html.twig
-#                submitted: :order/call_wide/widget:submitted.html.twig
+        -
+            alias:  product_form
+            entity: AppBundle\Entity\Order\OrderForm
+            form_type: AppBundle\Form\Type\Order\OrderFormType
+            template:
+                form_widget: :order/prod_form/widget:form.html.twig
+                submitted: :order/prod_form/widget:submitted.html.twig
 
 vich_uploader:
     db_driver: orm
