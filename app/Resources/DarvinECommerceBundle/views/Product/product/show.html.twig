@@ -19,5 +19,24 @@
 {% endblock %}
 
 {% block content %}
-    {% endif %}
+    <div class="product">
+        <div class="product_card">
+            <div class="image">
+                <img src="{{ product.images.first | image_resize('product_show')}}" alt="{{ product.title }}"}}">
+            </div>
+            <div class="info">
+                <div class="price">{{ product.price|localizednumber }} руб.</div>
+                <div class="button order" >
+                    <a class="ajax" id="button" href="{{ path('darvin_order_order_form', {'type': 'product_form'}) }}">Заказать</a></div>
+                <div class="characteristics">
+                    {{ product.annotation|raw}}
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            {{ product.text|raw }}
+        </div>
+
+    </div>
+
 {% endblock %}
