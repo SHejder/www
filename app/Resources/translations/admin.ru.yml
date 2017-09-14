@@ -5,3 +5,7 @@ ecommerce_product:
     entity:
         annotation: Краткое описание
 
+order_type:
+      product_form: Форма в карточке
+      call: Заказ звока
+

@@ -1,0 +1,16 @@
+error:
+    403: Доступ запрещен
+    404: Страница не найдена
+    500: Произошла ошибка
+
+order_call:
+    entity:
+        name: Имя
+        phone: Телефон
+
+order_form:
+    entity:
+        name: Имя
+        phone: Телефон
+        email: Email
+        message: Сообщение
