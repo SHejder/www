@@ -19,11 +19,11 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 /**
  * App config
  *
- * @method string   getPhone1()
- * @method string   getPhone2()
+ * @method string   getTopPhone()
  * @method string   getTopWorkingTime()
  * @method string   getFooterEmail()
  * @method string   getFooterAddress()
+ * @method string   getFooterPhones()
  */
 
 class AppConfiguration extends AbstractConfiguration implements ImageConfigurationInterface
@@ -36,8 +36,22 @@ class AppConfiguration extends AbstractConfiguration implements ImageConfigurati
     public function getModel()
     {
         return array(
-            new ParameterModel('phone1', ParameterModel::TYPE_STRING, null, []),
-            new ParameterModel('phone2', ParameterModel::TYPE_STRING, null, []),
+            new ParameterModel('top_phone', ParameterModel::TYPE_STRING, null, [
+                'form' => [
+                    'type' => CKEditorCompactType::class,
+                ],
+            ]),
+            new ParameterModel('footer_phones', ParameterModel::TYPE_STRING, null, [
+                'form' => [
+                    'type' => CKEditorCompactType::class,
+                ]
+            ]),
+            new ParameterModel('top_working_time', ParameterModel::TYPE_STRING, null, [
+                'form' => [
+                    'type' => CKEditorCompactType::class,
+                ],
+
+            ]),
             new ParameterModel('footer_working_time', ParameterModel::TYPE_STRING, null, [
                 'form' => [
                     'type' => CKEditorCompactType::class,
@@ -48,28 +62,8 @@ class AppConfiguration extends AbstractConfiguration implements ImageConfigurati
                     'entry_type'    => EmailType::class,
                 ],
             ]),
-            new ParameterModel('footer_address', ParameterModel::TYPE_STRING, null, [
-                'form' => [
-                    'type' => CKEditorCompactType::class,
-                ],
-            ]),
+            new ParameterModel('footer_address', ParameterModel::TYPE_STRING, null, []),
         );
-    }
-
-    /**
-     * @return string
-     */
-    public function getCanonizedPhone1()
-    {
-        return preg_replace('/[^+0-9]+/', '', $this->getPhone1());
-    }
-
-    /**
-     * @return string
-     */
-    public function getCanonizedPhone2()
-    {
-        return preg_replace('/[^+0-9]+/', '', $this->getPhone2());
     }
 
     /**

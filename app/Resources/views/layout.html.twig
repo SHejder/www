@@ -35,10 +35,9 @@
                 <div class="cf">
                     <div class="left_item">
                         <div class="schedule">
-                            <div class="day">Пн &mdash; Пт:</div>
-                            <div class="time">с 7<sup>00</sup>&nbsp;до 21<sup>30</sup>,</div>
-                            <div class="day">Сб &mdash; Вс:</div>
-                            <div class="time">с 9<sup>00</sup>&nbsp;до 17<sup>30</sup></div>
+                            {% if app_config.top_working_time %}
+                            {{ app_config.top_working_time|raw }}
+                            {% endif %}
                         </div>
                         <div class="text">
                             В остальное время<br/>Вы можете оформить интернет-заказ
@@ -51,8 +50,9 @@
                     </div>
                     <div class="right_item">
                         <div class="contacts">
-                            <a href="tel:+74959214459"><div class="code">+7&nbsp;(495)&nbsp;</div>921-44-59</a>,
-                            <a href="tel:+74952238693"><div class="code">+7&nbsp;(495)&nbsp;</div>223-86-93</a>
+                           {% if app_config.top_phone %}
+                                {{ app_config.top_phone|raw }}
+                            {% endif %}
                         </div>
                         <div class="order">
                             <a href="{{ path('darvin_order_order_form', {'type': 'call'}) }}" class="button ajax">Оформить заказ</a>
@@ -102,18 +102,24 @@
                     <div class="info">
                         <div class="item">
                             <div class="contacts">
-                                <a href="tel:+74959214459">+7&nbsp;(495)&nbsp;921-44-59</a>,
-                                <a href="tel:+74952238693">+7&nbsp;(495)&nbsp;223-86-93</a>
+                                {% if app_config.footer_phones %}
+                                    {{ app_config.footer_phones|raw }}
+                                {% endif %}
                             </div>
                             <div class="address">
-                                <div class="item">г. Москва, Нагорный проезд, дом 10а</div>
-                                <div class="item">min.voda7@gmail.com</div>
+                                {% if app_config.footer_address %}
+                                <div class="item">{{ app_config.footer_address }}</div>
+                                {% endif %}
+                                {% if app_config.footer_email %}
+                                <div class="item">{{ app_config.footer_email }}</div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="item">
                             <div class="schedule">
-                                <div class="item">Пн &mdash; Пт:&nbsp;с 7<sup>00</sup>&nbsp;до 21<sup>30</sup></div>
-                                <div class="item">Сб &mdash; Вс:&nbsp;с 9<sup>00</sup>&nbsp;до 17<sup>30</sup></div>
+                               {% if app_config.footer_working_time %}
+                                    {{ app_config.footer_working_time|raw }}
+                                {% endif %}
                             </div>
                             <div class="link"><a href="">Карта проезда</a></div>
                         </div>
