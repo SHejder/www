@@ -27,24 +27,60 @@
 
 {% block content %}
         {% if children is not empty %}
-        {% if page.label=="catalog" %}
-            {% for child in children %}
-                <a class="sub_category_header" href="{{ path('darvin_content_content_show', {'slug': child.slug}) }}">
-                    {{ child.title }}
-                </a>
-                {{ child.annotation|raw }}
-            {% endfor %}
-        {% else %}
-            <div class="subsection">
+            {% if page.label=="catalog" %}
                 {% for child in children %}
-                    <div class="item_wrap">
-                        <div class="item"><a href="{{ path('darvin_content_content_show', {'slug': child.slug}) }}">{{ child.title }}</a></div>
-                    </div>
+                    <a class="sub_category_header" href="{{ path('darvin_content_content_show', {'slug': child.slug}) }}">
+                        {{ child.title }}
+                    </a>
+                    {{ child.annotation|raw }}
                 {% endfor %}
+            {% else %}
+                <div class="subsection">
+                    {% for child in children %}
+                        <div class="item_wrap">
+                            <div class="item"><a href="{{ path('darvin_content_content_show', {'slug': child.slug}) }}">{{ child.title }}</a></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+         {% endif %}
+            {{ page_text|raw }}
+        {% if page.label=='contacts' %}
+            <div id="printcont">
+                <div class="contacts">
+                    <div class="item_wrap">
+                        <div class="item">
+                            <span class="name">Телефоны: </span>
+                            <span class="value"><a href="tel:+74959214459">+7&nbsp;(495)&nbsp;921-44-59</a>,</span>
+                            <span class="value"><a href="tel:+74952238693">+7&nbsp;(495)&nbsp;223-86-93</a></span>
+                        </div>
+                    </div>
+                    <div class="item_wrap">
+                        <div class="item">
+                            <span class="name">E-mail: </span>
+                            <span class="value">min.voda7@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="item_wrap">
+                        <div class="item">
+                            <span class="name">Режим работы: </span>
+                            <span class="value">Пн &mdash; Пт:&nbsp;с 7<sup>00</sup>&nbsp;до 21<sup>30</sup>,<br/></span>
+                            <span class="value">Сб &mdash; Вс:&nbsp;с 9<sup>00</sup>&nbsp;до 17<sup>30</sup></span>
+                        </div>
+                    </div>
+                    <div class="item_wrap">
+                        <div class="item">
+                            <span class="name">Адрес: </span>
+                            <span class="value">г. Москва, Нагорный проезд, дом 10а</span>
+                        </div>
+                    </div>
+                </div>
+                <span class="print_bt button dark_button" id="print_button">Печать страницы</span>
+                <div class="map">
+                    <iframe src="https://api-maps.yandex.ru/frame/v1/-/CVhBMCLP" width="560" height="400" frameborder="0"></iframe>
+                </div>
             </div>
-        {% endif %}
-    {% endif %}
-    {{ page_text|raw }}
+
 
     {% if pageIsEmpty == true %}
         <p>Страница в процессе наполнения, приносим свои извинения.</p>
