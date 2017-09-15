@@ -22,53 +22,9 @@
     </div>
     <div class="publication_container container">
         <div class="publication cf">
-            <div class="item news">
-                <div class="content">
-                    <p class="p_title">Новости</p>
-                    <div class="content">
-                        <div class="item">
-                            <div class="header">
-                                <div class="date">28 дек 2016</div>
-                                <a href="">У жажды - вкус смерти</a>
-                            </div>
-                            <div class="annotation">О воде много говорилось, но мало сказано. Потому фраза «Вода - это жизнь» в настоящее время для многих из нас ровно ничего не значит. А много ли мы о ней знаем, чтобы так беспечно к ней относиться?</div>
-                        </div>
-                        <div class="item">
-                            <div class="header">
-                                <div class="date">27 дек 2016</div>
-                                <a href="">Источник здоровья и бодрости</a>
-                            </div>
-                            <div class="annotation">Испокон века на Руси к воде относились как к чуду природы - благоговейно и трепетно. Совсем не случайно в русских народных сказках упоминается волшебная сила «живой воды», с помощью которой их герои возрождались заново.</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <a href="">Перейти ко всем новостям</a>
-                    </div>
-
-                </div>
-            </div>
-            <div class="item articles">
-                <div class="content">
-                    <p class="p_title">Статьи</p>
-                    <div class="content">
-                        <div class="item">
-                            <div class="header">
-                                <a href="">Зачем нужна чистка кулера</a>
-                            </div>
-                            <div class="annotation">В процессе эксплуатации кулера ввиду большого количества воды и тепла на стенках баков, соединительных трубках и краниках образуется биопленка. Биоплёнка — множество микроорганизмов, расположенных на поверхности.</div>
-                        </div>
-                        <div class="item">
-                            <div class="header">
-                                <a href="">Обзорная статья о видах питьевой воды</a>
-                            </div>
-                            <div class="annotation">Классификации питьевой воды, ее химический состав, процесс водоподготовки, гигиенические требования и другая полезная информация.</div>
-                        </div>
-                    </div>
-                    <div class="link">
-                        <a href="">Перейти ко всем статьям</a>
-                    </div>
-                </div>
-            </div>
+            {% if content_widget_exists('latest_publications') %}
+                {{ content_widget_render('latest_publications') }}
+            {% endif %}
         </div>
     </div>
     <div class="h2_container container">

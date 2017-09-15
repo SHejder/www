@@ -1,30 +1,45 @@
 {% if types is not empty %}
-    <ul>
         {% for type in types %}
-            <li>
-                {% if page_slugs[type.publicationListWidgetPlaceholder] is defined %}
-                    <a href="{{ path('darvin_content_content_show', {'slug': page_slugs[type.publicationListWidgetPlaceholder]}) }}">
-                        <h3>{{ type.title }}</h3>
-                    </a>
-                {% else %}
-                    <h3>{{ type.title }}</h3>
-                {% endif %}
-                {% if publications[type.id] is defined and publications[type.id] is not empty %}
-                    <ul>
+            {% if type.id == 1 %}
+            <div class="item news">
+                 <div class="content">
+                    <p class="p_title">{{ type.title }}</p>
                         {% for publication in publications[type.id] %}
-                            <li>
-                                {% if image_exists(publication.image) %}
-                                    <img src="{{ publication.image|image_crop('latest_publications') }}">
-                                {% endif %}
-                                <i>{{ publication.publishedAt|date('d.m.Y') }}</i>
-                                <a href="{{ path('darvin_content_content_show', {'slug': publication.slug}) }}">
-                                    <h4>{{ publication.title }}</h4>
-                                </a>
-                            </li>
+                         <div class="content">
+                            <div class="item">
+                                <div class="header">
+                                    <div class="date">{{ publication.publishedAt|date('d.m.Y') }}</div>
+                                    <a href="{{ path('darvin_content_content_show', {'slug': publication.slug}) }}">{{ publication.title }}</a>
+                                </div>
+                                <div class="annotation">{{ publication.annotation|raw }}</div>
+                            </div>
+                             {% endfor %}
+                         </div>
+                    <div class="link">
+                        <a href="{{ path('darvin_content_content_show', {'slug': page_slugs[type.publicationListWidgetPlaceholder]}) }}">Перейти ко всем новостям</a>
+                    </div>
+                 </div>
+            </div>
+            {% endif %}
+            {% if type.id == 2 %}
+            <div class="item articles">
+                <div class="content">
+                    <p class="p_title">{{ type.title }}</p>
+                        {% for publication in publications[type.id] %}
+                            <div class="content">
+                                <div class="item">
+                                    <div class="header">
+                                        <a href="{{ path('darvin_content_content_show', {'slug': publication.slug}) }}">{{ publication.title }}</a>
+                                    </div>
+                                    <div class="annotation">{{ publication.annotation|raw }}</div>
+                                </div>
+                            </div>
                         {% endfor %}
-                    </ul>
-                {% endif %}
-            </li>
+                    <div class="link">
+                        <a href="{{ path('darvin_content_content_show', {'slug': page_slugs[type.publicationListWidgetPlaceholder]}) }}">Перейти ко всем статьям</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         {% endfor %}
-    </ul>
 {% endif %}
