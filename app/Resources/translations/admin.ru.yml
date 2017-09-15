@@ -9,3 +9,13 @@ order_type:
       product_form: Форма в карточке
       call: Заказ звока
 
+configuration:
+    app:
+        title: Общие настройки
+        parameter:
+            top_phone: Телефоны в шапке
+            footer_phones: Телефоны в футере
+            top_working_time: График работы в шапке
+            footer_working_time: График работы в футере
+            footer_email: Почта в футере
+            footer_address: Адрес в футере
